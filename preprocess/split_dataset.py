@@ -22,7 +22,7 @@ def split_dataset(move_numb, A_dir, B_dir):
 
 
 if __name__ == '__main__':
-    move_numb = 1005
+    move_numb = 5000
     A_dir = '../datasets/npy_extra'
-    B_dir = '../datasets/npy_train'
+    B_dir = '../datasets/npy_val'
     split_dataset(move_numb, A_dir, B_dir)
