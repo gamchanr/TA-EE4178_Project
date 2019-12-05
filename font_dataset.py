@@ -8,9 +8,10 @@ import torchvision
 from torchvision import transforms
 import pandas as pd
 import matplotlib.pyplot as plt
+from torch.utils.data import Dataset
  
 
-class FontDataset():
+class FontDataset(Dataset):
     def __init__(self, npy_dir, max_dataset_size=float("inf")):
         self.dir_path = npy_dir
         self.to_tensor = transforms.ToTensor()
@@ -38,7 +39,7 @@ class FontDataset():
         return len(self.npy_entry)
 
 if __name__ == '__main__':
-    npy_dir = './npy_train'
+    npy_dir = '~/datasets/font/npy_train'.replace('~', os.path.expanduser('~'))
     font_dataset = FontDataset(npy_dir)
 
     font_dataloader = torch.utils.data.DataLoader(dataset=font_dataset,
