@@ -2,23 +2,23 @@ import torch
 import torchvision
 import torchvision.transforms as transforms
 from cnn import ConvNet
+from font_dataset import FontDataset
 
 
 # Set Configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Prepare Test Data
-test_data = torchvision.datasets.MNIST(root='./datasets',
-                                       train=False,
-                                       transform=transforms.ToTensor())
+test_dir = './datasets/npy_test'
+test_data = FontDataset(test_dir)
 
 # Define Test Dataloader
 test_loader = torch.utils.data.DataLoader(dataset=test_data,
                                           batch_size=100,
-                                          shuffle=True)
+                                          shuffle=False)
 
 # Load Model and Trained Parameters
-model_test = ConvNet(10).to(device)
+model_test = ConvNet(50).to(device)
 model_test.load_state_dict(torch.load('./model.pth', map_location=device))
 model_test.eval()
 
